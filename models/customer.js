@@ -14,6 +14,26 @@ class Customer {
     this.notes = notes;
   }
 
+  /** methods for getting/setting notes (keep as empty string, not NULL) */
+
+  set notes(val) {
+    this._notes = val || "";
+  }
+
+  get notes() {
+    return this._notes;
+  }
+
+  /** methods for getting/setting phone #. */
+
+  set phone(val) {
+    this._phone = val || null;
+  }
+
+  get phone() {
+    return this._phone;
+  }
+
   /** find all customers. */
 
   static async all() {
@@ -26,7 +46,13 @@ class Customer {
        FROM customers
        ORDER BY last_name, first_name`
     );
-    return results.rows.map(c => new Customer(c));
+    return results.rows.map((c) => new Customer(c));
+  }
+
+  // get the full name of a customer. //
+
+  get fullName() {
+    return `${this.firstName} ${this.lastName}`;
   }
 
   /** get a customer by ID. */
